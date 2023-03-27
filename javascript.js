@@ -1,3 +1,11 @@
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    console.log(button.id);
+  });
+});
+
 // generates a random number and associates that choice
 // with a computerChoice
 function getComputerChoice() {
@@ -82,4 +90,4 @@ function validUserInput(playerSelection) {
   } else return 0;
 }
 
-game();
+//game();

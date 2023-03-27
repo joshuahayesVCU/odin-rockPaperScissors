@@ -22,12 +22,8 @@
   align-items: center;
 }
 
-.player-buttons {
-  list-style: none;
+.game-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
-  margin-top: 16px;
-  padding: 0;
 }
