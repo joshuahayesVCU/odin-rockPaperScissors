@@ -7,6 +7,7 @@ buttons.forEach((button) => {
 });
 
 var footerText = document.querySelector("#footerText");
+var scoreText = document.querySelector("#scoreText");
 
 // generates a random number and associates that choice
 // with a computerChoice
@@ -51,12 +52,16 @@ function game(playerSelection) {
   switch (playRound(playerSelection, computerSelection)) {
     case 0:
       footerText.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
+      computerScore++;
       break;
     case 1:
       footerText.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
+      playerScore++;
       break;
     default:
       footerText.textContent = "Tie game!";
       break;
   }
+
+  scoreText.textContent = `${playerScore} : ${computerScore}`;
 }
