@@ -6,6 +6,8 @@ buttons.forEach((button) => {
   });
 });
 
+var footerText = document.querySelector("#footerText");
+
 // generates a random number and associates that choice
 // with a computerChoice
 function getComputerChoice() {
@@ -41,17 +43,20 @@ function playRound(playerSelection, computerSelection) {
 // simulates 5 rounds of rock paper scissors
 // returns results to the console
 function game(playerSelection) {
+  var playerScore = 0;
+  var computerScore = 0;
+
   // simulate round with playRound()
   let computerSelection = getComputerChoice();
   switch (playRound(playerSelection, computerSelection)) {
     case 0:
-      console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+      footerText.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
       break;
     case 1:
-      console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+      footerText.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
       break;
     default:
-      console.log("Tie game!");
+      footerText.textContent = "Tie game!";
       break;
   }
 }
