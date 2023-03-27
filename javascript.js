@@ -2,7 +2,7 @@ const buttons = document.querySelectorAll("button");
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    console.log(button.id);
+    game(button.id);
   });
 });
 
@@ -40,54 +40,18 @@ function playRound(playerSelection, computerSelection) {
 
 // simulates 5 rounds of rock paper scissors
 // returns results to the console
-function game() {
-  // score tracking
-  let playerScore = 0;
-  let computerScore = 0;
-
-  // main game loop
-  for (let i = 1; i <= 5; i++) {
-    console.log(`Game ${i} of 5`);
-
-    // take and validates user input
-    let playerSelection = prompt("Rock, Paper, Or Scissors?").toLowerCase();
-    validInputBool = validUserInput(playerSelection);
-
-    while (validUserInput(playerSelection) !== 1) {
-      playerSelection = prompt(
-        "ERROR: Invalid input. Please type 'rock', 'paper', or 'scissors'"
-      ).toLowerCase();
-      validUserInput(playerSelection);
-    }
-
-    // simulate round with playRound()
-    let computerSelection = getComputerChoice();
-    switch (playRound(playerSelection, computerSelection)) {
-      case 0:
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-        console.log(`Current Score: ${playerScore} - ${++computerScore}`);
-        break;
-      case 1:
-        console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-        console.log(`Current Score: ${++playerScore} - ${computerScore}`);
-        break;
-      default:
-        console.log("Tie game!");
-        console.log(`Current Score: ${playerScore} - ${computerScore}`);
-        break;
-    }
+function game(playerSelection) {
+  // simulate round with playRound()
+  let computerSelection = getComputerChoice();
+  switch (playRound(playerSelection, computerSelection)) {
+    case 0:
+      console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+      break;
+    case 1:
+      console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+      break;
+    default:
+      console.log("Tie game!");
+      break;
   }
 }
-
-// helper function to valididate userInput
-function validUserInput(playerSelection) {
-  if (
-    playerSelection === "rock" ||
-    playerSelection === "scissors" ||
-    playerSelection == "paper"
-  ) {
-    return 1;
-  } else return 0;
-}
-
-//game();
