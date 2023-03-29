@@ -1,11 +1,19 @@
-const buttons = document.querySelectorAll("button");
+//
 
+const buttons = document.querySelectorAll("button");
+var playerSelection;
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    game(button.id);
+    // if round 0, start
+    // if rounds >1, change behavior
+    playerSelection = button.id;
+    playGame(playerSelection);
   });
 });
 
+var roundsPlayed = 0;
+var playerScore = 0;
+var computerScore = 0;
 var footerText = document.querySelector("#footerText");
 var scoreText = document.querySelector("#scoreText");
 
@@ -31,37 +39,42 @@ function getComputerChoice() {
 }
 
 // determines the result of a round
-// returns 0 for a loss, 1 for a win, and 3 for a tie
+// returns 0 for a loss, 1 for a win, and 0 for a tie
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection === computerSelection) return 3;
-  if (playerSelection === "rock" && computerSelection === "paper") return 0;
-  if (playerSelection === "paper" && computerSelection === "scissors") return 0;
-  if (playerSelection === "scissors" && computerSelection === "rock") return 0;
+  if (playerSelection === computerSelection) return 0;
+  if (playerSelection === "rock" && computerSelection === "paper") return -1;
+  if (playerSelection === "paper" && computerSelection === "scissors")
+    return -1;
+  if (playerSelection === "scissors" && computerSelection === "rock") return -1;
 
   return 1;
 }
 
-// simulates 5 rounds of rock paper scissors
-// returns results to the console
-function game(playerSelection) {
-  var playerScore = 0;
-  var computerScore = 0;
-
-  // simulate round with playRound()
+// overloaded, pull out continueGame, updateScore, endGame
+function playGame(playerSelection) {
   let computerSelection = getComputerChoice();
-  switch (playRound(playerSelection, computerSelection)) {
-    case 0:
-      footerText.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
-      computerScore++;
-      break;
-    case 1:
-      footerText.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
-      playerScore++;
-      break;
-    default:
-      footerText.textContent = "Tie game!";
-      break;
-  }
+  // simulate round with playRound()
 
+  outcome = playRound(playerSelection, computerSelection);
+
+  updateScore(outcome, playerScore, computerScore);
+  updateFooter(outcome, playerSelection, computerSelection);
+  updateScoreboard();
+}
+
+function updateScoreboard() {
   scoreText.textContent = `${playerScore} : ${computerScore}`;
+}
+
+function updateFooter(outcome, playerSelection, computerSelection) {
+  if (outcome === 0) footerText.textContent = "Tie game!";
+  if (outcome === 1)
+    footerText.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
+  else
+    footerText.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
+}
+
+function updateScore(outcome) {
+  if (outcome === 1) playerScore++;
+  else computerScore++;
 }
