@@ -41,6 +41,8 @@ function getComputerChoice() {
 // determines the result of a round
 // returns 0 for a loss, 1 for a win, and 0 for a tie
 function playRound(playerSelection, computerSelection) {
+  roundsPlayed++;
+
   if (playerSelection === computerSelection) return 0;
   if (playerSelection === "rock" && computerSelection === "paper") return -1;
   if (playerSelection === "paper" && computerSelection === "scissors")
@@ -60,6 +62,13 @@ function playGame(playerSelection) {
   updateScore(outcome, playerScore, computerScore);
   updateFooter(outcome, playerSelection, computerSelection);
   updateScoreboard();
+}
+
+function resetGame(roundsPlayed) {
+  if (roundsPlayed % 5 === 0) {
+    playerScore = 0;
+    computerScore = 0;
+  }
 }
 
 function updateScoreboard() {
