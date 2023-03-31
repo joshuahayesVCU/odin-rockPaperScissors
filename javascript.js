@@ -1,11 +1,7 @@
-//
-
 const buttons = document.querySelectorAll("button");
 var playerSelection;
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    // if round 0, start
-    // if rounds >1, change behavior
     playerSelection = button.id;
     playGame(playerSelection);
   });
@@ -16,6 +12,7 @@ var playerScore = 0;
 var computerScore = 0;
 var footerText = document.querySelector("#footerText");
 var scoreText = document.querySelector("#scoreText");
+var subtitle = document.querySelector("#subtitle");
 
 // generates a random number and associates that choice
 // with a computerChoice
@@ -52,20 +49,27 @@ function playRound(playerSelection, computerSelection) {
   return 1;
 }
 
-// overloaded, pull out continueGame, updateScore, endGame
 function playGame(playerSelection) {
   let computerSelection = getComputerChoice();
-  // simulate round with playRound()
-
+  subtitle.textContent = `You selected ${playerSelection}`;
   outcome = playRound(playerSelection, computerSelection);
 
   updateScore(outcome, playerScore, computerScore);
   updateFooter(outcome, playerSelection, computerSelection);
   updateScoreboard();
+  resetGame();
 }
 
-function resetGame(roundsPlayed) {
-  if (roundsPlayed % 5 === 0) {
+function resetGame() {
+  if (playerScore === 5) {
+    subtitle.textContent =
+      "Congrats! You win! Select an action to start a new game.";
+    playerScore = 0;
+    computerScore = 0;
+  }
+  if (computerScore === 5) {
+    subtitle.textContent =
+      "Oh no! You lose... Select an action to start a new game.";
     playerScore = 0;
     computerScore = 0;
   }
