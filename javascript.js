@@ -13,6 +13,8 @@ var computerScore = 0;
 var footerText = document.querySelector("#footerText");
 var scoreText = document.querySelector("#scoreText");
 var subtitle = document.querySelector("#subtitle");
+var playerAction = document.querySelector("#playerAction");
+var computerAction = document.querySelector("#computerAction");
 
 // generates a random number and associates that choice
 // with a computerChoice
@@ -57,6 +59,7 @@ function playGame(playerSelection) {
   updateScore(outcome, playerScore, computerScore);
   updateFooter(outcome, playerSelection, computerSelection);
   updateScoreboard();
+  updateActionChoice(playerSelection, computerSelection);
   resetGame();
 }
 
@@ -73,6 +76,19 @@ function resetGame() {
     playerScore = 0;
     computerScore = 0;
   }
+}
+
+function updatePlayerAction(playerSelection) {
+  playerAction.textContent = `${playerSelection}`;
+}
+
+function updateComputerAction(computerSelection) {
+  computerAction.textContent = `${computerSelection}`;
+}
+
+function updateActionChoice(playerSelection, computerSelection) {
+  updatePlayerAction(playerSelection);
+  updateComputerAction(computerSelection);
 }
 
 function updateScoreboard() {

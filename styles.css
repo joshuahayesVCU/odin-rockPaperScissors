@@ -1,29 +1,65 @@
+.body {
+  height: 100%;
+  margin: 0;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
+  width: 100%;
   align-items: center;
+}
+
+.score {
+  font-size: 32px;
+}
+
+.subtitle {
+  font-size: 20px;
 }
 
 .game-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-grow: 2;
+  gap: 48px;
+  height: 400px;
+}
+
+.game-container p {
+  font-size: 18px;
+}
+
+.game-container h3 {
+  font-size: 36px;
 }
 
 .game-player,
 .game-computer {
   min-height: 300px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   padding: 1em;
   border: solid;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+}
+
+.game-computer h1 {
+  margin-bottom: 120px;
 }
 
 .game-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  gap: 16px;
+}
+
+.footer {
+  font-size: 20px;
 }
